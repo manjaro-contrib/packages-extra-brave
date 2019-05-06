@@ -3,8 +3,8 @@
 # Contributor: Jacob Mischka <jacob@mischka.me>
 # Contributor: Manuel Mazzuola <origin.of@gmail.com>
 
-pkgname=brave
-pkgver=0.63.48
+pkgname=brave-beta
+pkgver=0.64.65
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
@@ -14,23 +14,23 @@ depends=('gtk3' 'gconf' 'nss' 'alsa-lib' 'libxss' 'libgnome-keyring' 'ttf-font')
 optdepends=('cups: Printer support'
             'pepper-flash: Adobe Flash support')
 provides=('brave-browser')
-conflicts=("${pkgname}-latest" 'brave-bin' 'brave-beta-bin')
-source=("$pkgname-$pkgver.zip::$url/download/v${pkgver}/brave-v${pkgver}-linux-x64.zip"
+conflicts=("${pkgname}-latest" 'brave-bin' 'brave-beta-bin' 'brave')
+source=("brave-beta-$pkgver.zip::$url/download/v${pkgver}/brave-v${pkgver}-linux-x64.zip"
         'MPL2::https://raw.githubusercontent.com/brave/browser-laptop/master/LICENSE.txt'
-        "$pkgname.sh"
-        "$pkgname.desktop"
+        "brave.sh"
+        "brave.desktop"
         "braveAbout.png")
 options=(!strip)
-sha512sums=('0d3f615a69ee1831ddb6ef8a2bb9f879ea8424614ce7d6a876fccb44508b1041881aa9023f0908e7929db0af0b5f04855398d5a756f68bfb341e097adfdecf86'
+sha512sums=('067e1b82345f7520765d073641a9d19b74d3c42c75606f27ca6f5be01b451203a3e477262ef5aed66a49d2a39705b02e6360efee63c60ab6e1c3f4280f73c8b5'
             'b8823586fead21247c8208bd842fb5cd32d4cb3ca2a02339ce2baf2c9cb938dfcb8eb7b24c95225ae625cd0ee59fbbd8293393f3ed1a4b45d13ba3f9f62a791f'
             'd38e00c716a2789ca27c4dce86ab454552e156dd5048689f5800658b31e842c361dfa601ee70419c57b786194222e01f4be24c17f755e7e658b8c071ff097767'
             '400d345271a3c98be668e4aa08743d707647c92ee35951e937238ac07074119cfdb9601e1934cdf46014bd181b26ab0b568e4cab67c790efe53d029d8b0f9c55'
             'd7bef52e336bd908d24bf3a084a1fc480831d27a3c80af4c31872465b6a0ce39bdf298e620ae9865526c974465807559cc75610b835e60b4358f65a8a8ff159e')
-noextract=("$pkgname-$pkgver.zip")
+noextract=("brave-beta-$pkgver.zip")
 
 prepare() {
   mkdir -p brave
-  cat $pkgname-$pkgver.zip | bsdtar -xf- -C brave
+  cat brave-beta-$pkgver.zip | bsdtar -xf- -C brave
   chmod +x brave/brave
 }
 
@@ -38,13 +38,13 @@ _bsdtardir="brave"
 
 package() {
     install -d -m0755 "$pkgdir/usr/lib"
-    cp -a --reflink=auto $_bsdtardir "$pkgdir/usr/lib/$pkgname"
+    cp -a --reflink=auto $_bsdtardir "$pkgdir/usr/lib/brave"
 
-    install -Dm0755 "$pkgname.sh" "$pkgdir/usr/bin/brave"
-    install -Dm0644 -t "$pkgdir/usr/share/applications" "$pkgname.desktop"
+    install -Dm0755 "brave.sh" "$pkgdir/usr/bin/brave"
+    install -Dm0644 -t "$pkgdir/usr/share/applications" "brave.desktop"
     install -Dm0644 "braveAbout.png" "$pkgdir/usr/share/pixmaps/brave.png"
-    install -Dm0664 -t "$pkgdir/usr/share/licenses/$pkgname" "MPL2"
-    mv "$pkgdir/usr/lib/$pkgname/"{LICENSE,LICENSES.chromium.html} "$pkgdir/usr/share/licenses/$pkgname"
+    install -Dm0664 -t "$pkgdir/usr/share/licenses/brave" "MPL2"
+    mv "$pkgdir/usr/lib/brave/"{LICENSE,LICENSES.chromium.html} "$pkgdir/usr/share/licenses/brave"
 
     ln -s /usr/lib/PepperFlash "$pkgdir/usr/lib/pepperflashplugin-nonfree"
 }
