@@ -4,7 +4,7 @@
 # Contributor: Manuel Mazzuola <origin.of@gmail.com>
 
 pkgname=brave-beta
-pkgver=0.72.119
+pkgver=0.72.124
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
@@ -21,7 +21,7 @@ source=("brave-beta-$pkgver.zip::$url/download/v${pkgver}/brave-v${pkgver}-linux
         "brave.desktop"
         "braveAbout.png")
 options=(!strip)
-sha512sums=('0895184ff29cd9f1e9f7e92c0f5d245669db585f3e5f1a4564b33da3477ca60cc62e526dec894ddce9662cb1bafa2a7e1161ed8a0ab3a10d615fc83038d2811c'
+sha512sums=('a85fa6c8b9f5d75db6c645869460a9660acc6ea36f49b2af15bb3adf5e0e981b4de6f71565eec310de5873f7e8a0b59d933db712cf8580ccc677fb7dfeb9ed38'
             'b8823586fead21247c8208bd842fb5cd32d4cb3ca2a02339ce2baf2c9cb938dfcb8eb7b24c95225ae625cd0ee59fbbd8293393f3ed1a4b45d13ba3f9f62a791f'
             'd38e00c716a2789ca27c4dce86ab454552e156dd5048689f5800658b31e842c361dfa601ee70419c57b786194222e01f4be24c17f755e7e658b8c071ff097767'
             '400d345271a3c98be668e4aa08743d707647c92ee35951e937238ac07074119cfdb9601e1934cdf46014bd181b26ab0b568e4cab67c790efe53d029d8b0f9c55'
