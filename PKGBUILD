@@ -4,27 +4,26 @@
 # Contributor: Manuel Mazzuola <origin.of@gmail.com>
 
 pkgname=brave
-pkgver=1.0.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
 url='https://github.com/brave/brave-browser/releases'
-license=('custom')
-depends=('gtk3' 'gconf' 'nss' 'alsa-lib' 'libxss' 'libgnome-keyring' 'ttf-font')
-optdepends=('cups: Printer support'
-            'pepper-flash: Adobe Flash support')
-provides=('brave-browser')
-conflicts=("${pkgname}-latest" 'brave-bin' 'brave-beta-bin')
-source=("$pkgname-$pkgver.zip::$url/download/v${pkgver}/brave-v${pkgver}-linux-x64.zip"
-        'MPL2::https://raw.githubusercontent.com/brave/browser-laptop/master/LICENSE.txt'
+license=("MPL2" "BSD" "custom:chromium")
+depends=("gtk3" "nss" "alsa-lib" "libxss" "ttf-font")
+optdepends=("cups: Printer support"
+            "pepper-flash: Adobe Flash support"
+            "libgnome-keyring: Enable GNOME keyring support")
+provides=("${pkgname%-bin}" "brave-browser")
+conflicts=("${pkgname%-bin}")
+source=("$pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/download/v${pkgver}/brave-v${pkgver}-linux-x64.zip"
         "$pkgname.sh"
-        "$pkgname.desktop"
-        "braveAbout.png")
+        "brave-browser.desktop"
+        "logo.png")
 options=(!strip)
-sha512sums=('e40988056e0d13c07d36c9eb94e596b93aeba66805ea65c1a0d0f36d19be292ca73af27eb6d1f3b694e3c1b7f478843955d1a639194bf1953cc6d8b8d486d3d6'
-            'b8823586fead21247c8208bd842fb5cd32d4cb3ca2a02339ce2baf2c9cb938dfcb8eb7b24c95225ae625cd0ee59fbbd8293393f3ed1a4b45d13ba3f9f62a791f'
-            'd38e00c716a2789ca27c4dce86ab454552e156dd5048689f5800658b31e842c361dfa601ee70419c57b786194222e01f4be24c17f755e7e658b8c071ff097767'
-            '400d345271a3c98be668e4aa08743d707647c92ee35951e937238ac07074119cfdb9601e1934cdf46014bd181b26ab0b568e4cab67c790efe53d029d8b0f9c55'
+sha512sums=('5384900f5e6e9f20ddffebdc288ffa9663654bcb28613d40f4fa68da3180bfce01e3671e9c39fdb97df621bca17f01f0ef211088695e0748d2a498dcd7e48020'
+            '9a75979ec295d41508538ca7d46e7aa1616f38980aeb1a6c22191d540cdfb13607b60ac40fac9113de3937836479fa64f3f9b6487bdda3346dc77d727ceb2de2'
+            'c21aecaafec43bc1ce1ea3439667efb4c7ea5e54bfa87346a9ae9650de1e90c80174b1610a9216f936f693593816c9585c6be1875b3bd318d067079c06251e92'
             'd7bef52e336bd908d24bf3a084a1fc480831d27a3c80af4c31872465b6a0ce39bdf298e620ae9865526c974465807559cc75610b835e60b4358f65a8a8ff159e')
 noextract=("$pkgname-$pkgver.zip")
 
@@ -41,10 +40,9 @@ package() {
     cp -a --reflink=auto $_bsdtardir "$pkgdir/usr/lib/$pkgname"
 
     install -Dm0755 "$pkgname.sh" "$pkgdir/usr/bin/brave"
-    install -Dm0644 -t "$pkgdir/usr/share/applications" "$pkgname.desktop"
-    install -Dm0644 "braveAbout.png" "$pkgdir/usr/share/pixmaps/brave.png"
-    install -Dm0664 -t "$pkgdir/usr/share/licenses/$pkgname" "MPL2"
-    mv "$pkgdir/usr/lib/$pkgname/"{LICENSE,LICENSES.chromium.html} "$pkgdir/usr/share/licenses/$pkgname"
-
-    ln -s /usr/lib/PepperFlash "$pkgdir/usr/lib/pepperflashplugin-nonfree"
+    install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
+    install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave.png"
+    LICENSES_DIR="$pkgdir/usr/share/licenses/$pkgname"
+    mkdir -p "$LICENSES_DIR"
+    mv "$pkgdir/usr/lib/$pkgname/"{LICENSE,LICENSES.chromium.html} "$LICENSES_DIR"
 }
