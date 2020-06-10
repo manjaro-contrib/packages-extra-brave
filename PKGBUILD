@@ -4,7 +4,7 @@
 # Contributor: Manuel Mazzuola <origin.of@gmail.com>
 
 pkgname=brave-beta
-pkgver=1.10.60
+pkgver=1.11.58
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
@@ -17,11 +17,13 @@ optdepends=("cups: Printer support"
 provides=("${pkgname%-bin}" "brave-browser" "brave")
 conflicts=("${pkgname%-bin}" "brave")
 source=("$pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/download/v${pkgver}/brave-v${pkgver}-linux-x64.zip"
+        "LICENSE::https://raw.githubusercontent.com/brave/brave-browser/master/LICENSE"
         "$pkgname.sh"
         "brave-browser.desktop"
         "logo.png")
 options=(!strip)
-sha512sums=('86d8fc4d44efbbf95a1e6edd174f7d45d2e67646480560f67601512369ba7ca03eeed20fc1bf3607e0136e94413664e05a563b70e9dad6c28b9351488ef627be'
+sha512sums=('68d865f7032bc726df9d7aed9fa377491648472bc9fa4e36f1945a849b249c101f0abf52985d1edf8f1b8ed664d8529d9b9002fddc15b004c0626bb2b951f185'
+            '239dbc27d68e0a03e92c68fb746602d8183084c9624a533fe92a991b8a4658d5154c901ff64826992eabcf89a5b52cb32f9cf29fd25a42bef2b5d3932010d806'
             'f29f4836b113d08c46b2e9cb67ed07e7c9660feabca579b2febeae69a9b7d12da6f14bf290ed73963d3f983b58f76000ef2930224704aeb64bce9da3907e054f'
             'c21aecaafec43bc1ce1ea3439667efb4c7ea5e54bfa87346a9ae9650de1e90c80174b1610a9216f936f693593816c9585c6be1875b3bd318d067079c06251e92'
             'd7bef52e336bd908d24bf3a084a1fc480831d27a3c80af4c31872465b6a0ce39bdf298e620ae9865526c974465807559cc75610b835e60b4358f65a8a8ff159e')
@@ -42,7 +44,6 @@ package() {
     install -Dm0755 "$pkgname.sh" "$pkgdir/usr/bin/brave"
     install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
     install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave.png"
-    LICENSES_DIR="$pkgdir/usr/share/licenses/$pkgname"
-    mkdir -p "$LICENSES_DIR"
-    mv "$pkgdir/usr/lib/$pkgname/"{LICENSE,LICENSES.chromium.html} "$LICENSES_DIR"
+    install -Dm0664 -t "${pkgdir}/usr/share/licenses/${pkgname}" "LICENSE"
+    ln -s /usr/lib/PepperFlash "${pkgdir}/usr/lib/pepperflashplugin-nonfree"
 }
