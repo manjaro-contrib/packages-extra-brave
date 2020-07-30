@@ -46,7 +46,6 @@ package() {
     install -Dm0755 "$pkgname.sh" "$pkgdir/usr/bin/brave"
     install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
     install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave.png"
-    LICENSES_DIR="$pkgdir/usr/share/licenses/$pkgname"
-    mkdir -p "$LICENSES_DIR"
-    mv "$pkgdir/usr/lib/$pkgname/"{LICENSE,LICENSES.chromium.html} "$LICENSES_DIR"
+    install -Dm0664 -t "${pkgdir}/usr/share/licenses/${pkgname}" "LICENSE"
+    ln -s /usr/lib/PepperFlash "${pkgdir}/usr/lib/pepperflashplugin-nonfree"
 }
