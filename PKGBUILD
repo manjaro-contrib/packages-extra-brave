@@ -8,7 +8,7 @@
 # Contributor: Andrés Rodríguez <hello@andres.codes>
 
 pkgname=brave
-pkgver=1.12.105
+pkgver=1.14.84
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
@@ -25,7 +25,7 @@ source=("$pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/d
         "brave-browser.desktop"
         "logo.png")
 options=(!strip)
-sha512sums=('c97446f46afb8bc080d59fc02a5f54a80f0e5d4e85406da7490b5d851bc67fa386cfe20da8e80d4eddc8e992b79964e36bb714a25e13e7be7ff08d7471730753'
+sha512sums=('ab84e577468a74eaa01aba659bca6158e228357d5d2e871d5d6c31827ee2a32e5b96f280bafcb64706d0431b0d4b51249d332c3504597cb9e323c4e44259d87f'
             '9a75979ec295d41508538ca7d46e7aa1616f38980aeb1a6c22191d540cdfb13607b60ac40fac9113de3937836479fa64f3f9b6487bdda3346dc77d727ceb2de2'
             'c21aecaafec43bc1ce1ea3439667efb4c7ea5e54bfa87346a9ae9650de1e90c80174b1610a9216f936f693593816c9585c6be1875b3bd318d067079c06251e92'
             'd7bef52e336bd908d24bf3a084a1fc480831d27a3c80af4c31872465b6a0ce39bdf298e620ae9865526c974465807559cc75610b835e60b4358f65a8a8ff159e')
@@ -48,5 +48,8 @@ package() {
     install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave.png"
     LICENSES_DIR="$pkgdir/usr/share/licenses/$pkgname"
     mkdir -p "$LICENSES_DIR"
-    mv "$pkgdir/usr/lib/$pkgname/"{LICENSE,LICENSES.chromium.html} "$LICENSES_DIR"
+    if [ -f "$pkgdir/usr/lib/$pkgname/LICENSE" ] && [ -f "$pkgdir/usr/lib/$pkgname/LICENSES.chromium.html" ]; then
+      mv "$pkgdir/usr/lib/$pkgname/"{LICENSE,LICENSES.chromium.html} "$LICENSES_DIR"
+    fi
+
 }
