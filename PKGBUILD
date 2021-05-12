@@ -1,5 +1,6 @@
 # Maintainer: Philip Müller <philm[at]manjaro[dot]org>
 # Maintainer: Helmut Stult <helmut[at]manjaro[dot]org>
+# Maintainer: Stefano Capitani <stefano[at]manjaro[dot]org>
 
 # Arch credits:
 # Maintainer: Greg White <gwhite@kupulau.com>
