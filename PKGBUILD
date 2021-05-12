@@ -1,14 +1,18 @@
-# Maintainer: Philip Müller <philm@manjaro.org>
+# Maintainer: Philip Müller <philm[at]manjaro[dot]org>
+# Maintainer: Helmut Stult <helmut[at]manjaro[dot]org>
+# Maintainer: Stefano Capitani <stefano[at]manjaro[dot]org>
+
+# Arch credits:
+# Mantainer: Andrés Rodríguez <hello@andres.codes>
 # Contributor: Caleb Maclennan <caleb@alerque.com>
 # Contributor: Jacob Mischka <jacob@mischka.me>
 # Contributor: Manuel Mazzuola <origin.of@gmail.com>
 # Contributor: Simón Oroño <simonorono@protonmail.com>
 # Contributor: now-im <now im 627 @ gmail . com>
 # Contributor: Giusy Digital <kurmikon at libero dot it>
-# Contributor: Andrés Rodríguez <hello@andres.codes>
 
 pkgname=brave
-pkgver=1.23.71
+pkgver=1.24.84
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
@@ -25,7 +29,7 @@ source=("$pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/d
         "brave-browser.desktop"
         "logo.png")
 options=(!strip)
-sha512sums=('255af60025cdcb18b8dbf779e5a973f6c38f444cc4d2d7d9edb050252827244e62ccfb17c7ba007eff0909a03454472daecf342b24171bc33937930a3aca4f33'
+sha512sums=('7717bc8468bf9c50feb49d25d32f74a530f8bb27cbcb281c48b6d931e58f612200ad2fbbcda9f4a899990b19e02a281c3c500594dde21446552916aea4487ff5'
             '9a75979ec295d41508538ca7d46e7aa1616f38980aeb1a6c22191d540cdfb13607b60ac40fac9113de3937836479fa64f3f9b6487bdda3346dc77d727ceb2de2'
             'c21aecaafec43bc1ce1ea3439667efb4c7ea5e54bfa87346a9ae9650de1e90c80174b1610a9216f936f693593816c9585c6be1875b3bd318d067079c06251e92'
             'd7bef52e336bd908d24bf3a084a1fc480831d27a3c80af4c31872465b6a0ce39bdf298e620ae9865526c974465807559cc75610b835e60b4358f65a8a8ff159e')
