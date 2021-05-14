@@ -13,7 +13,7 @@
 
 pkgname=brave
 pkgver=1.24.85
-pkgrel=1
+pkgrel=2
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
 url='https://brave.com/download'
@@ -31,7 +31,7 @@ source=("$pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/d
 options=(!strip)
 sha256sums=('7a271212157ce9184b87b9c665869a682d53b13033b7e78764c4486ddc56fb88'
             'cfcdb2afe2ecf1c5ec786fff57c6aca84f42a101807143da3e4ae620d7235dff'
-            '2191ba32800a423f37b7a667093e2bdef5762fe5111fee1d5067e66e26564488'
+            '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60'
             '4a585cb8740f4c9ba267f0df19d894eb9fae1b9a6af4a3e44737b7d0bcbc104a')
 noextract=("$pkgname-$pkgver.zip")
 
@@ -49,7 +49,7 @@ package() {
 
     install -Dm0755 "$pkgname.sh" "$pkgdir/usr/bin/brave"
     install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
-    install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave.png"
+    install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave-desktop.png"
     LICENSES_DIR="$pkgdir/usr/share/licenses/$pkgname"
     mkdir -p "$LICENSES_DIR"
     if [ -f "$pkgdir/usr/lib/$pkgname/LICENSE" ] && [ -f "$pkgdir/usr/lib/$pkgname/LICENSES.chromium.html" ]; then
