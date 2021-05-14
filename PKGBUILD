@@ -7,7 +7,7 @@
 
 pkgname=brave-beta
 pkgver=1.25.59
-pkgrel=1
+pkgrel=2
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
 url='https://github.com/brave/brave-browser/releases'
@@ -27,7 +27,7 @@ options=(!strip)
 sha256sums=('6b7817ce6367d7d75d1061057a31e420eec914851108a5eb6c4756857de624d3'
             '3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04'
             'ae44455a9ce06c68eec22ade43815d8a809d7fde3e90a950400e2ba7da6a7560'
-            '2191ba32800a423f37b7a667093e2bdef5762fe5111fee1d5067e66e26564488'
+            '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60'
             '4a585cb8740f4c9ba267f0df19d894eb9fae1b9a6af4a3e44737b7d0bcbc104a')
 noextract=("$pkgname-$pkgver.zip")
 
@@ -45,7 +45,7 @@ package() {
 
     install -Dm0755 "$pkgname.sh" "$pkgdir/usr/bin/brave"
     install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
-    install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave.png"
+    install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave-desktop.png"
     install -Dm0664 -t "${pkgdir}/usr/share/licenses/${pkgname}" "LICENSE"
     ln -s /usr/lib/PepperFlash "${pkgdir}/usr/lib/pepperflashplugin-nonfree"
 }
