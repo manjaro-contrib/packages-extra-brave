@@ -12,8 +12,8 @@
 # Contributor: Giusy Digital <kurmikon at libero dot it>
 
 pkgname=brave
-pkgver=1.24.85
-pkgrel=2
+pkgver=1.25.68
+pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
 url='https://brave.com/download'
@@ -29,7 +29,7 @@ source=("$pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/d
         "brave-browser.desktop"
         "logo.png")
 options=(!strip)
-sha256sums=('7a271212157ce9184b87b9c665869a682d53b13033b7e78764c4486ddc56fb88'
+sha256sums=('386e0b3d5dcb2a4ff5effc39df1f3f76bac2b9e7623d141e0f39f97f5659affa'
             'cfcdb2afe2ecf1c5ec786fff57c6aca84f42a101807143da3e4ae620d7235dff'
             '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60'
             '4a585cb8740f4c9ba267f0df19d894eb9fae1b9a6af4a3e44737b7d0bcbc104a')
