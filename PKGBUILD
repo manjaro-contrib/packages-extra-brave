@@ -17,6 +17,7 @@ depends=("gtk3" "nss" "alsa-lib" "libxss" "ttf-font")
 optdepends=("cups: Printer support"
             "pepper-flash: Adobe Flash support"
             "libgnome-keyring: Enable GNOME keyring support")
+makedepends=('curl')
 provides=("${pkgname%-bin}" "brave-browser" "brave")
 conflicts=("${pkgname%-bin}" "brave")
 source=("${pkgname}-${_pkgver}.zip::https://github.com/brave/brave-browser/releases/download/v${_pkgver}/brave-browser-beta-${_pkgver}-linux-amd64.zip"
