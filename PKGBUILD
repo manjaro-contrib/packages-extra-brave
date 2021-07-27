@@ -13,7 +13,7 @@
 
 _pkgname=brave
 pkgname=$_pkgname-browser
-_pkgver=$(echo $(curl -s 'https://brave-browser-downloads.s3.brave.com/latest/release.version'))
+pkgver=$(curl -s 'https://brave-browser-downloads.s3.brave.com/latest/release.version')
 pkgver=1.27.109
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
@@ -28,7 +28,7 @@ makedepends=('curl')
 provides=("${_pkgname%-bin}")
 conflicts=("${_pkgname%-bin}" "$_pkgname")
 replaces=("$_pkgname")
-source=("$_pkgname-$_pkgver.zip::https://github.com/brave/brave-browser/releases/download/v${_pkgver}/brave-browser-${_pkgver}-linux-amd64.zip"
+source=("$_pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/download/v${pkgver}/brave-browser-${pkgver}-linux-amd64.zip"
         "$_pkgname.sh"
         "brave-browser.desktop"
         "logo.png")
@@ -38,10 +38,6 @@ sha256sums=('af2a2423ed233431162211521046373093cf678711e94a985f48c9c46181731a'
             '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60'
             '4a585cb8740f4c9ba267f0df19d894eb9fae1b9a6af4a3e44737b7d0bcbc104a')
 noextract=("$_pkgname-$_pkgver.zip")
-
-pkgver() {
-  echo $(curl -s 'https://brave-browser-downloads.s3.brave.com/latest/release.version')
-}
 
 prepare() {
   mkdir -p brave
