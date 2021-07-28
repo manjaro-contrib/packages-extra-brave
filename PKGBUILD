@@ -7,8 +7,8 @@
 
 _pkgname=brave-beta
 pkgname=$_pkgname-browser
-_pkgver=$(echo $(curl -s 'https://brave-browser-downloads.s3.brave.com/latest/beta.version'))
-pkgver=1.28.92
+#_pkgver=$(echo $(curl -s 'https://brave-browser-downloads.s3.brave.com/latest/beta.version'))
+pkgver=1.27.84
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
@@ -22,26 +22,22 @@ makedepends=('curl')
 provides=("${_pkgname%-bin}" "brave-browser" "brave")
 conflicts=("${_pkgname%-bin}" "brave" "$_pkgname")
 replaces=("$_pkgname")
-source=("${_pkgname}-${_pkgver}.zip::https://github.com/brave/brave-browser/releases/download/v${_pkgver}/brave-browser-beta-${_pkgver}-linux-amd64.zip"
+source=("${_pkgname}-${pkgver}.zip::https://github.com/brave/brave-browser/releases/download/v${pkgver}/brave-browser-beta-${pkgver}-linux-amd64.zip"
         "LICENSE::https://raw.githubusercontent.com/brave/brave-browser/master/LICENSE"
         "$_pkgname.sh"
         "brave-browser.desktop"
         "logo.png")
 options=(!strip)
-sha256sums=('c357a506a0e258dcc2d77092d8d729de0a87d407f4aabd807eae225893be8fe6'
+sha256sums=('197070866b395171dd7b3712102ef285c9298f9f0808f5611b43494491fb9464'
             '3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04'
             'ae44455a9ce06c68eec22ade43815d8a809d7fde3e90a950400e2ba7da6a7560'
             '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60'
             '4a585cb8740f4c9ba267f0df19d894eb9fae1b9a6af4a3e44737b7d0bcbc104a')
-noextract=("$_pkgname-$_pkgver.zip")
-
-pkgver() {
-  echo $(curl -s 'https://brave-browser-downloads.s3.brave.com/latest/beta.version')
-}
+noextract=("$_pkgname-$pkgver.zip")
 
 prepare() {
   mkdir -p brave
-  cat $_pkgname-$_pkgver.zip | bsdtar -xf- -C brave
+  cat $_pkgname-$pkgver.zip | bsdtar -xf- -C brave
   chmod +x brave/brave
 }
 
