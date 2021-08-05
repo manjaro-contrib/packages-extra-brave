@@ -7,8 +7,7 @@
 
 _pkgname=brave-beta
 pkgname=$_pkgname-browser
-#_pkgver=$(echo $(curl -s 'https://brave-browser-downloads.s3.brave.com/latest/beta.version'))
-pkgver=1.27.84
+pkgver=$(echo $(curl -s 'https://brave-browser-downloads.s3.brave.com/latest/beta.version'))
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
 arch=('x86_64')
@@ -28,7 +27,7 @@ source=("${_pkgname}-${pkgver}.zip::https://github.com/brave/brave-browser/relea
         "brave-browser.desktop"
         "logo.png")
 options=(!strip)
-sha256sums=('197070866b395171dd7b3712102ef285c9298f9f0808f5611b43494491fb9464'
+sha256sums=('07af38251d7ddbbc414665d5e1df9b1396982096b4fea2002130a85a61bb563c'
             '3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04'
             'ae44455a9ce06c68eec22ade43815d8a809d7fde3e90a950400e2ba7da6a7560'
             '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60'
@@ -46,6 +45,8 @@ _bsdtardir="brave"
 package() {
     install -d -m0755 "$pkgdir/usr/lib"
     cp -a --reflink=auto $_bsdtardir "$pkgdir/usr/lib/$_pkgname"
+    # see https://github.com/brave/brave-browser/issues/17122
+	chmod 755 "$pkgdir/usr/lib/$_pkgname/crashpad_handler"
 
     install -Dm0755 "$_pkgname.sh" "$pkgdir/usr/bin/brave"
     install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
