@@ -33,7 +33,7 @@ source=("$_pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/
         "brave-browser.desktop"
         "logo.png")
 options=(!strip)
-sha256sums=('2a8448a7bd94baf4d2859ad18848ad0d7cfb3361e04a00b4691f0201a7dc0106'
+sha256sums=('dbed50ab91cd99ee15a84cb7977a395b2510e1dd2ee10ba437763fe72b180f23'
             'cfcdb2afe2ecf1c5ec786fff57c6aca84f42a101807143da3e4ae620d7235dff'
             '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60'
             '4a585cb8740f4c9ba267f0df19d894eb9fae1b9a6af4a3e44737b7d0bcbc104a')
