@@ -27,7 +27,7 @@ source=("${_pkgname}-${pkgver}.zip::https://github.com/brave/brave-browser/relea
         "brave-browser.desktop"
         "logo.png")
 options=(!strip)
-sha256sums=('eae55832accf590c309c16bdf5774f970069e2c7bff849ce1a844f65350d43e2'
+sha256sums=('edb5f3d4f24ad93e48e49d0c9ba69e239191492bbe632f6448fc92696d999291'
             '3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04'
             'ae44455a9ce06c68eec22ade43815d8a809d7fde3e90a950400e2ba7da6a7560'
             '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60'
@@ -46,7 +46,7 @@ package() {
     install -d -m0755 "$pkgdir/usr/lib"
     cp -a --reflink=auto $_bsdtardir "$pkgdir/usr/lib/$_pkgname"
     # see https://github.com/brave/brave-browser/issues/17122
-	#chmod 755 "$pkgdir/usr/lib/$_pkgname/crashpad_handler"
+	chmod 755 "$pkgdir/usr/lib/$_pkgname/crashpad_handler"
 
     install -Dm0755 "$_pkgname.sh" "$pkgdir/usr/bin/brave"
     install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
