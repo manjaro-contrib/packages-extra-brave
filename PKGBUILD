@@ -51,7 +51,7 @@ package() {
     install -d -m0755 "$pkgdir/usr/lib"
     cp -a --reflink=auto $_bsdtardir "$pkgdir/usr/lib/$_pkgname"
     # see https://github.com/brave/brave-browser/issues/17122
-	chmod 755 "$pkgdir/usr/lib/$_pkgname/crashpad_handler"
+	chmod 755 "$pkgdir/usr/lib/$_pkgname/chrome_crashpad_handler"
 
     install -Dm0755 "$_pkgname.sh" "$pkgdir/usr/bin/brave"
     install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
