@@ -51,7 +51,7 @@ package() {
     install -Dm0755 "$_pkgname-beta.sh" "$pkgdir/usr/bin/brave"
     install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
     #install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave-desktop.png"
-    install -Dm0644 /usr/lib/brave/product_logo_128_beta.png "$pkgdir/usr/share/pixmaps/brave-desktop.png"
+    install -Dm0644 "${pkgdir}/usr/lib/brave/product_logo_128_beta.png" "$pkgdir/usr/share/pixmaps/brave-desktop.png"
     install -Dm0664 -t "${pkgdir}/usr/share/licenses/${_pkgname}" "LICENSE"
     ln -s /usr/lib/PepperFlash "${pkgdir}/usr/lib/pepperflashplugin-nonfree"
 }
