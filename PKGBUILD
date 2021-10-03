@@ -24,14 +24,12 @@ replaces=("$_pkgname" 'brave-beta-browser')
 source=("${_pkgname}-${pkgver}.zip::https://github.com/brave/brave-browser/releases/download/v${pkgver}/brave-browser-beta-${pkgver}-linux-amd64.zip"
         "LICENSE::https://raw.githubusercontent.com/brave/brave-browser/master/LICENSE"
         "$_pkgname-beta.sh"
-        "brave-browser.desktop"
-        "logo.png")
+        "brave-browser.desktop")
 options=(!strip)
 sha256sums=('d3d729e19668456e2cd27254ba561760c41929212f1a405fa3003947f2887a0d'
             '3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04'
             'cfcdb2afe2ecf1c5ec786fff57c6aca84f42a101807143da3e4ae620d7235dff'
-            '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60'
-            '4a585cb8740f4c9ba267f0df19d894eb9fae1b9a6af4a3e44737b7d0bcbc104a')
+            '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60')
 noextract=("$_pkgname-$pkgver.zip")
 
 prepare() {
@@ -50,8 +48,8 @@ package() {
 
     install -Dm0755 "$_pkgname-beta.sh" "$pkgdir/usr/bin/brave"
     install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
-    #install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave-desktop.png"
-    install -Dm0644 "${pkgdir}/usr/lib/brave/product_logo_128_beta.png" "$pkgdir/usr/share/pixmaps/brave-desktop.png"
     install -Dm0664 -t "${pkgdir}/usr/share/licenses/${_pkgname}" "LICENSE"
     ln -s /usr/lib/PepperFlash "${pkgdir}/usr/lib/pepperflashplugin-nonfree"
+    mkdir "$pkgdir/usr/share/pixmaps"
+    ln -s "$pkgdir/usr/lib/brave/product_logo_128_beta.png" "$pkgdir/usr/share/pixmaps/brave-desktop.png"
 }
