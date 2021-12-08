@@ -9,47 +9,42 @@ _pkgname=brave
 pkgname=$_pkgname-browser-beta
 pkgver=$(echo $(curl -s 'https://brave-browser-downloads.s3.brave.com/latest/beta.version'))
 pkgrel=1
-pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
+pkgdesc='Web browser that blocks ads and trackers by default (beta binary release).'
 arch=('x86_64')
-url='https://github.com/brave/brave-browser/releases'
-license=("MPL2" "BSD" "custom:chromium")
-depends=("gtk3" "nss" "alsa-lib" "libxss" "ttf-font")
-optdepends=("cups: Printer support"
-            "pepper-flash: Adobe Flash support"
-            "libgnome-keyring: Enable GNOME keyring support")
-makedepends=('curl')
-provides=("${_pkgname%-bin}" "brave-browser" "brave")
-conflicts=("${_pkgname%-bin}" "brave" "$_pkgname" 'brave-beta-browser')
-replaces=("$_pkgname" 'brave-beta-browser')
-source=("${_pkgname}-${pkgver}.zip::https://github.com/brave/brave-browser/releases/download/v${pkgver}/brave-browser-beta-${pkgver}-linux-amd64.zip"
-        "LICENSE::https://raw.githubusercontent.com/brave/brave-browser/master/LICENSE"
-        "$_pkgname-beta.sh"
-        "brave-browser.desktop")
+url='https://brave.com/download-beta'
+license=('MPL2')
+depends=('gtk3' 'nss' 'alsa-lib' 'libxss' 'ttf-font')
+optdepends=('cups: Printer support'
+            'pepper-flash: Adobe Flash support'
+            'mesa: Hardware accelerated rendering'
+            'libglvnd: Support multiple different OpenGL drivers at any given time'
+	    'libgnome-keyring: gnome keyriung support')
+provides=('brave-beta-browser')
+conflicts=('brave-beta-bin')
+source=("https://github.com/brave/brave-browser/releases/download/v${pkgver}/brave-browser-beta_${pkgver}_amd64.deb"
+        'MPL2::https://raw.githubusercontent.com/brave/browser-laptop/master/LICENSE.txt'
+        brave-beta-bin.sh)
 options=(!strip)
-sha256sums=('7d2e7cafb36bfba7b6106d47d1be57c8e4c3d447fa61c0bf507e362ce8413c9e'
-            '3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04'
-            'cfcdb2afe2ecf1c5ec786fff57c6aca84f42a101807143da3e4ae620d7235dff'
-            '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60')
-noextract=("$_pkgname-$pkgver.zip")
+sha512sums=('d078f49a189851351379341c32ebeb81631069ef6318e424308ca5e4084624d9ef21313cbe079bab386b0505041f65fa9635f18ed985138f9b48a7a0e17b1148'
+            'b8823586fead21247c8208bd842fb5cd32d4cb3ca2a02339ce2baf2c9cb938dfcb8eb7b24c95225ae625cd0ee59fbbd8293393f3ed1a4b45d13ba3f9f62a791f'
+            'b4aa6d6faf2b879d14310141dd92dc7144ff5b45a1075ee54451427029a01812a25f8249540d6bc9f0e9bbe6efc4d8913cc90d4c9546566b19fd1f605cf1a883')
 
 prepare() {
   mkdir -p brave
-  cat $_pkgname-$pkgver.zip | bsdtar -xf- -C brave
-  chmod +x brave/brave
+  tar xf data.tar.xz -C brave
+  # Delete unneeded cron job
+  rm -rf brave/opt/brave.com/brave-beta/cron
+  # Use our script to launch (allows overriding flags, sets up data dir)
+  sed -i "s/\/usr\/bin\/brave-browser-beta/\/usr\/bin\/brave-beta/g" brave/usr/share/applications/brave-browser-beta.desktop    
 }
 
-_bsdtardir="brave"
-
 package() {
-    install -d -m0755 "$pkgdir/usr/lib"
-    cp -a --reflink=auto $_bsdtardir "$pkgdir/usr/lib/$_pkgname"
-    # see https://github.com/brave/brave-browser/issues/17122
-	chmod 755 "$pkgdir/usr/lib/$_pkgname/chrome_crashpad_handler"
+    cp -a --reflink=auto brave/opt "$pkgdir/opt"
+    cp -a --reflink=auto brave/usr "$pkgdir/usr"
+    
+    install -Dm0755 'brave-beta-bin.sh' "$pkgdir/usr/bin/brave-beta"
+    install -Dm0644 "brave/opt/brave.com/brave-beta/product_logo_128_beta.png" "$pkgdir/usr/share/pixmaps/brave-browser-beta.png"
 
-    install -Dm0755 "$_pkgname-beta.sh" "$pkgdir/usr/bin/brave"
-    install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
-    install -Dm0664 -t "${pkgdir}/usr/share/licenses/${_pkgname}" "LICENSE"
-    ln -s /usr/lib/PepperFlash "${pkgdir}/usr/lib/pepperflashplugin-nonfree"
-    mkdir "$pkgdir/usr/share/pixmaps"
-    ln -s "$pkgdir/usr/lib/brave/product_logo_128_beta.png" "$pkgdir/usr/share/pixmaps/brave-desktop.png"
+    install -Dm0664 -t "$pkgdir/usr/share/licenses/$pkgname" "brave/opt/brave.com/brave-beta/LICENSE"
+    chmod 4755 "$pkgdir/opt/brave.com/brave-beta/chrome-sandbox"
 }
