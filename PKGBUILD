@@ -16,50 +16,48 @@ pkgname=$_pkgname-browser
 pkgver=$(curl -s 'https://brave-browser-downloads.s3.brave.com/latest/release.version')
 #pkgver=1.27.110
 pkgrel=1
-pkgdesc='Web browser that blocks ads and trackers by default (latest binary release).'
-arch=('x86_64')
-url='https://brave.com/download'
-license=("MPL2" "BSD" "custom:chromium")
-depends=("gtk3" "nss" "alsa-lib" "libxss" "ttf-font")
-optdepends=("cups: Printer support"
-            "pepper-flash: Adobe Flash support"
-            "libgnome-keyring: Enable GNOME keyring support")
-makedepends=('curl')
-provides=("${_pkgname%-bin}")
-conflicts=("${_pkgname%-bin}" "$_pkgname")
-replaces=("$_pkgname")
-source=("$_pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/download/v${pkgver}/brave-browser-${pkgver}-linux-amd64.zip"
-        "$_pkgname.sh"
-        "brave-browser.desktop"
-        "logo.png")
+pkgdesc='Web browser that blocks ads and trackers by default (binary release)'
+arch=(x86_64)
+url=https://brave.com
+license=(MPL2 BSD custom:chromium)
+depends=(alsa-lib
+         gtk3
+         libxss
+         nss
+         ttf-font)
+optdepends=('cups: Printer support'
+            'libgnome-keyring: Enable GNOME keyring support'
+            'libnotify: Native notification support')
+provides=("${pkgname%-bin}=$pkgver")
+conflicts=("${pkgname%-bin}")
 options=(!strip)
+source=("$pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/download/v$pkgver/brave-browser-$pkgver-linux-amd64.zip"
+        "$_pkgname.sh"
+        'brave-browser.desktop')
+noextract=("$pkgname-$pkgver.zip")
 sha256sums=('9336b1da2edd5471641ec22b2d9f96d297ec106b952ad69980088e161bfc487b'
-            'cfcdb2afe2ecf1c5ec786fff57c6aca84f42a101807143da3e4ae620d7235dff'
-            '76d0c74c6676b6e579c37c41846140bc76a86e27c5cabd21bc9ae4c4c505cf60'
-            '4a585cb8740f4c9ba267f0df19d894eb9fae1b9a6af4a3e44737b7d0bcbc104a')
-noextract=("$_pkgname-$pkgver.zip")
+            '256a3435f225ba4616ca12257e8c0423a350adbc1af00479ec8c65d6389717ac'
+            'c07276b69c7304981525ecb022f92daf7ae125a4fb05ac3442157b50826e257a')
 
 prepare() {
-  mkdir -p brave
-  cat $_pkgname-$pkgver.zip | bsdtar -xf- -C brave
-  chmod +x brave/brave
+	mkdir -p brave
+	bsdtar -xf "$pkgname-$pkgver.zip" -C brave
+	chmod +x brave/brave
 }
 
-_bsdtardir="brave"
-
 package() {
-    install -d -m0755 "$pkgdir/usr/lib"
-    cp -a --reflink=auto $_bsdtardir "$pkgdir/usr/lib/$_pkgname"
-    # see https://github.com/brave/brave-browser/issues/17122
-	chmod 755 "$pkgdir/usr/lib/$_pkgname/chrome_crashpad_handler"
+	install -dm0755 "$pkgdir/usr/lib"
+	cp -a brave "$pkgdir/usr/lib/$pkgname"
 
-    install -Dm0755 "$_pkgname.sh" "$pkgdir/usr/bin/brave"
-    install -Dm0644 -t "$pkgdir/usr/share/applications" "brave-browser.desktop"
-    install -Dm0644 "logo.png" "$pkgdir/usr/share/pixmaps/brave-desktop.png"
-    LICENSES_DIR="$pkgdir/usr/share/licenses/$_pkgname"
-    mkdir -p "$LICENSES_DIR"
-    if [ -f "$pkgdir/usr/lib/$_pkgname/LICENSE" ] && [ -f "$pkgdir/usr/lib/$_pkgname/LICENSES.chromium.html" ]; then
-      mv "$pkgdir/usr/lib/$_pkgname/"{LICENSE,LICENSES.chromium.html} "$LICENSES_DIR"
-    fi
+	# allow firejail users to get the suid sandbox working
+	chmod 4755 "$pkgdir/usr/lib/$pkgname/chrome-sandbox"
 
+	install -Dm0755 "$_pkgname.sh" "$pkgdir/usr/bin/brave"
+	install -Dm0644 -t "$pkgdir/usr/share/applications/" "brave-browser.desktop"
+	install -Dm0644 -t "$pkgdir/usr/share/licenses/$pkgname/" brave/LICENSE
+	pushd "$pkgdir/usr/"
+	for size in 16x16 24x24 32x32 48x48 64x64 128x128 256x256; do
+		install -Dm0644 "lib/$pkgname/product_logo_${size/x*/}.png" \
+			"share/icons/hicolor/$size/apps/brave-desktop.png"
+	done
 }
