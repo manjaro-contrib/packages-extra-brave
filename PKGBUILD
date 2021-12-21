@@ -25,7 +25,7 @@ source=("https://github.com/brave/brave-browser/releases/download/v${pkgver}/bra
         'MPL2::https://raw.githubusercontent.com/brave/browser-laptop/master/LICENSE.txt'
         brave-beta.sh)
 options=(!strip)
-sha512sums=('3e2cfe90fd45f2bbdc25b7e9fb94e94a519019043e72bfb5c90d0c6c441e4101931f5940225261f6bbae3b1c79b5876dd4f11eb045ed78c4bcb65a408852c510'
+sha512sums=('869207cba4106d03174f3ec052b315f0bb11f3cdf1fb423cbc70b17e7413d7215ed9a723c69a882a22cb2ce3700df9b7d3d4f9568c054862bf9f611c005f9be8'
             'b8823586fead21247c8208bd842fb5cd32d4cb3ca2a02339ce2baf2c9cb938dfcb8eb7b24c95225ae625cd0ee59fbbd8293393f3ed1a4b45d13ba3f9f62a791f'
             'a3ad778f0933153814eefc08ec07f8634222f3c6187c0ad6d165789bcca8ef0ca1b913eeecc4ba5760700a3b0ff61194920a1dbe088b205db006bdc0902b95c4')
 
