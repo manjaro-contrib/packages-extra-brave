@@ -25,9 +25,9 @@ source=("https://github.com/brave/brave-browser/releases/download/v${pkgver}/bra
         'MPL2::https://raw.githubusercontent.com/brave/browser-laptop/master/LICENSE.txt'
         brave-beta.sh)
 options=(!strip)
-sha512sums=('f5d9b6187db40a39816062c5ddd4ff3808cfae0126084d83e97991be9c47ed08a14c2808c7bf33eb8ef59b985111eef0af938817fab2d574c2d10113892d8587'
+sha512sums=('d658b3aaf155ecc388acdc59fc96c7805434c8ee40f41295721fed6d45f1d5f2f138de34497067fd621896c2a1695dada3fe445ea302b50144bfcd0e090cdea1'
             'b8823586fead21247c8208bd842fb5cd32d4cb3ca2a02339ce2baf2c9cb938dfcb8eb7b24c95225ae625cd0ee59fbbd8293393f3ed1a4b45d13ba3f9f62a791f'
-            'a3ad778f0933153814eefc08ec07f8634222f3c6187c0ad6d165789bcca8ef0ca1b913eeecc4ba5760700a3b0ff61194920a1dbe088b205db006bdc0902b95c4')
+            'b4aa6d6faf2b879d14310141dd92dc7144ff5b45a1075ee54451427029a01812a25f8249540d6bc9f0e9bbe6efc4d8913cc90d4c9546566b19fd1f605cf1a883')
 
 prepare() {
   mkdir -p brave
