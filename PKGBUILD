@@ -35,7 +35,7 @@ source=("$pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/d
         "$_pkgname.sh"
         'brave-browser.desktop')
 noextract=("$pkgname-$pkgver.zip")
-sha256sums=('981d73f4b6147e4eb8a6e72870ed37a1631b499e9f7a82d4a14722004ed38b58'
+sha256sums=('30be7f1781f0feb0c33c521b1f1dd51284fc48b18c691d03a034796fbe16567d'
             '34814b275b51a4dac1c2aee8ee9ec2b6dbc1da32bc952a2a3147875e25965fc4'
             'c07276b69c7304981525ecb022f92daf7ae125a4fb05ac3442157b50826e257a')
 
