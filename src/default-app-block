@@ -1,0 +1,10 @@
+    <web-browser>
+      <name>Brave Web Browser</name>
+      <executable>/opt/brave.com/brave/brave-browser</executable>
+      <command>/opt/brave.com/brave/brave-browser %s</command>
+      <icon-name>brave-browser</icon-name>
+      <run-in-terminal>false</run-in-terminal>
+      <netscape-remote>true</netscape-remote>
+      <tab-command>/opt/brave.com/brave/brave-browser %s</tab-command>
+      <win-command>/opt/brave.com/brave/brave-browser --new-window %s</win-command>
+    </web-browser>
