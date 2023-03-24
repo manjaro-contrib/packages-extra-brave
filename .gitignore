@@ -1,0 +1,12 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!PKGBUILD
+!brave-beta.sh
+!MPL2
+!distribution-agreement
+!brave-browser.desktop
+
+# etc...
