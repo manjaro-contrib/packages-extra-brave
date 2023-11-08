@@ -5,7 +5,7 @@
 
 _pkgname=brave
 pkgname=$_pkgname-browser-beta
-pkgver=1.61.61
+pkgver=1.61.67
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (beta binary release).'
 arch=('x86_64')
@@ -23,7 +23,7 @@ source=("https://github.com/brave/brave-browser/releases/download/v${pkgver}/bra
         'MPL2::https://raw.githubusercontent.com/brave/browser-laptop/master/LICENSE.txt'
         brave-beta.sh)
 options=(!strip)
-sha512sums=('25b361dbffda6cb6d721020b4341793dbc8c34b11f759149c6850dacd0e5f3dc89d01dfad4cc3b7acce4be452d45706341dacf6f1d31ed9023c362fb1dd57fc6'
+sha512sums=('05c0baaaf53c536627d2688b5a0ea682429b6507b03b9c1e00b231039b14a8a7f0f1d8ec29ecc28a5216373399bcc16f2bd1bf459e1fb7c71da728c9e1b677f4'
             'b8823586fead21247c8208bd842fb5cd32d4cb3ca2a02339ce2baf2c9cb938dfcb8eb7b24c95225ae625cd0ee59fbbd8293393f3ed1a4b45d13ba3f9f62a791f'
             'b4aa6d6faf2b879d14310141dd92dc7144ff5b45a1075ee54451427029a01812a25f8249540d6bc9f0e9bbe6efc4d8913cc90d4c9546566b19fd1f605cf1a883')
 
