@@ -11,7 +11,7 @@
 
 _pkgname=brave
 pkgname=$_pkgname-browser
-pkgver=1.78.102
+pkgver=1.79.118
 #pkgver=1.36.105
 pkgrel=1
 pkgdesc='Web browser that blocks ads and trackers by default (binary release)'
@@ -33,7 +33,7 @@ source=("$pkgname-$pkgver.zip::https://github.com/brave/brave-browser/releases/d
         "$_pkgname.sh"
         'brave-browser.desktop')
 noextract=("$pkgname-$pkgver.zip")
-sha256sums=('f8acbb4bb65b35b695f74e8555c359102f38bd6151e0223f1036faf2448bc858'
+sha256sums=('37725a828f76812681cfc762d8df7561ac3efefbd9fa9147ed24a118aef83df9'
             '34814b275b51a4dac1c2aee8ee9ec2b6dbc1da32bc952a2a3147875e25965fc4'
             'c07276b69c7304981525ecb022f92daf7ae125a4fb05ac3442157b50826e257a')
 
