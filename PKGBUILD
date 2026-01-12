@@ -24,7 +24,6 @@ depends=(alsa-lib
          nss
          ttf-font)
 optdepends=('cups: Printer support'
-            'libgnome-keyring: Enable GNOME keyring support'
             'libnotify: Native notification support')
 provides=("${pkgname%-bin}=$pkgver")
 conflicts=("${pkgname%-bin}")
